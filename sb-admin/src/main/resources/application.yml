@@ -1,0 +1,68 @@
+spring:
+  profiles:
+    active: ##{spring.profiles.active}##
+    #include: common
+  task:
+    scheduling:
+      pool:
+        size: 16
+  main:
+    allow-bean-definition-overriding: true
+  http-client:
+    pool:
+      maxTotalConnect: 1000
+      maxConnectPerRoute: 200
+      connectTimeout: 5000
+      readTimeout: 10000
+      connectionRequestTimout: 200
+      retryTimes: 0
+      charset: UTF-8
+      keepAliveTime: 10
+  servlet:
+    multipart:
+      max-file-size: 1100MB
+      max-request-size: 1100MB
+  thymeleaf:
+    cache: false
+
+server:
+  port: 8010
+  compression:
+    enabled: true
+  tomcat:
+    uri-encoding: UTF-8
+
+logging:
+  config: classpath:logback-spring.xml
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+# 插件配置 pagehelper
+pagehelper:
+  helperDialect: mysql
+  # 分页合理化参数，默认值为false。当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页
+  reasonable: false
+  # 支持通过 Mapper 接口参数来传递分页参数
+  supportMethodsArguments: true
+
+project:
+  datasource:
+    content:
+      url: jdbc:mysql://127.0.0.1:3306/dbname?serverTimezone=Asia/Shanghai
+      username: username
+      password: password
+      name: dbname
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      configuration:
+        maximum-pool-size: 200
+        connection-test-query: select 1
+        minimum-idle: 20
+      mybatis:
+        configuration:
+          map-underscore-to-camel-case: true
+        mapper-locations: classpath*:mysql/content/mapper/*.xml
+
+environment: dev
+

@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuqy.persist.mapper.content.JinhongWordsMapper" >
+  <resultMap id="BaseResultMap" type="com.wuqy.common.entity.content.JinhongWords" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="word" property="word" jdbcType="VARCHAR" />
+    <result column="op_account" property="opAccount" jdbcType="VARCHAR" />
+    <result column="op_nick" property="opNick" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <if test="oredCriteria != null" >
+        <foreach collection="oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="id != null" >
+         and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="word != null and word != ''" >
+         and word = #{word,jdbcType=VARCHAR}
+      </if>
+      <if test="wordRange != null and wordRange != ''" >
+         and word like #{wordRange,jdbcType=VARCHAR}
+      </if>
+      <if test="opAccount != null and opAccount != ''" >
+         and op_account = #{opAccount,jdbcType=VARCHAR}
+      </if>
+      <if test="opAccountRange != null and opAccountRange != ''" >
+         and op_account like #{opAccountRange,jdbcType=VARCHAR}
+      </if>
+      <if test="opNick != null and opNick != ''" >
+         and op_nick = #{opNick,jdbcType=VARCHAR}
+      </if>
+      <if test="opNickRange != null and opNickRange != ''" >
+         and op_nick like #{opNickRange,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+         and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange1 != null" >
+         and create_time &gt;= #{createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange2 != null" >
+         and create_time &lt;= #{createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="extracClause != null and extracClause != ''" >
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <if test="example.oredCriteria != null" >
+        <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.id != null" >
+         and id = #{example.id,jdbcType=INTEGER}
+      </if>
+      <if test="example.word != null and example.word != ''" >
+         and word = #{example.word,jdbcType=VARCHAR}
+      </if>
+      <if test="example.wordRange != null and example.wordRange != ''" >
+         and word like #{example.wordRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.opAccount != null and example.opAccount != ''" >
+         and op_account = #{example.opAccount,jdbcType=VARCHAR}
+      </if>
+      <if test="example.opAccountRange != null and example.opAccountRange != ''" >
+         and op_account like #{example.opAccountRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.opNick != null and example.opNick != ''" >
+         and op_nick = #{example.opNick,jdbcType=VARCHAR}
+      </if>
+      <if test="example.opNickRange != null and example.opNickRange != ''" >
+         and op_nick like #{example.opNickRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.createTime != null" >
+         and create_time = #{example.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange1 != null" >
+         and create_time &gt;= #{example.createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange2 != null" >
+         and create_time &lt;= #{example.createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''" >
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, word, op_account, op_nick, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wuqy.common.entity.content.JinhongWordsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from jinhong_words
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitEnd != null" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from jinhong_words
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jinhong_words
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wuqy.common.entity.content.JinhongWordsExample" >
+    delete from jinhong_words
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wuqy.common.entity.content.JinhongWords" useGeneratedKeys="true" keyProperty="id" >
+    insert into jinhong_words (word, op_account, op_nick, 
+      create_time)
+    values (#{word,jdbcType=VARCHAR}, #{opAccount,jdbcType=VARCHAR}, #{opNick,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuqy.common.entity.content.JinhongWords" useGeneratedKeys="true" keyProperty="id" >
+    insert into jinhong_words
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="word != null" >
+        word,
+      </if>
+      <if test="opAccount != null" >
+        op_account,
+      </if>
+      <if test="opNick != null" >
+        op_nick,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="word != null" >
+        #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="opAccount != null" >
+        #{opAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="opNick != null" >
+        #{opNick,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wuqy.common.entity.content.JinhongWordsExample" resultType="java.lang.Integer" >
+    select count(*) from jinhong_words
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update jinhong_words
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.word != null" >
+        word = #{record.word,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opAccount != null" >
+        op_account = #{record.opAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opNick != null" >
+        op_nick = #{record.opNick,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update jinhong_words
+    set id = #{record.id,jdbcType=INTEGER},
+      word = #{record.word,jdbcType=VARCHAR},
+      op_account = #{record.opAccount,jdbcType=VARCHAR},
+      op_nick = #{record.opNick,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuqy.common.entity.content.JinhongWords" >
+    update jinhong_words
+    <set >
+      <if test="word != null" >
+        word = #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="opAccount != null" >
+        op_account = #{opAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="opNick != null" >
+        op_nick = #{opNick,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuqy.common.entity.content.JinhongWords" >
+    update jinhong_words
+    set word = #{word,jdbcType=VARCHAR},
+      op_account = #{opAccount,jdbcType=VARCHAR},
+      op_nick = #{opNick,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertListSelective" parameterType="map" >
+    insert into jinhong_words
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        id,
+      </if>
+      <if test="record.word != null" >
+        word,
+      </if>
+      <if test="record.opAccount != null" >
+        op_account,
+      </if>
+      <if test="record.opNick != null" >
+        op_nick,
+      </if>
+      <if test="record.createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.id != null" >
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.word != null" >
+          #{listItem.word,jdbcType=VARCHAR},
+        </if>
+        <if test="record.opAccount != null" >
+          #{listItem.opAccount,jdbcType=VARCHAR},
+        </if>
+        <if test="record.opNick != null" >
+          #{listItem.opNick,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createTime != null" >
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map" >
+    replace into jinhong_words
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        id,
+      </if>
+      <if test="record.word != null" >
+        word,
+      </if>
+      <if test="record.opAccount != null" >
+        op_account,
+      </if>
+      <if test="record.opNick != null" >
+        op_nick,
+      </if>
+      <if test="record.createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.id != null" >
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.word != null" >
+          #{listItem.word,jdbcType=VARCHAR},
+        </if>
+        <if test="record.opAccount != null" >
+          #{listItem.opAccount,jdbcType=VARCHAR},
+        </if>
+        <if test="record.opNick != null" >
+          #{listItem.opNick,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createTime != null" >
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.wuqy.common.entity.content.JinhongWords" >
+    replace into jinhong_words
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="word != null" >
+        word,
+      </if>
+      <if test="opAccount != null" >
+        op_account,
+      </if>
+      <if test="opNick != null" >
+        op_nick,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="word != null" >
+        #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="opAccount != null" >
+        #{opAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="opNick != null" >
+        #{opNick,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.wuqy.common.entity.content.JinhongWords" >
+    insert into jinhong_words
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="word != null" >
+        word,
+      </if>
+      <if test="opAccount != null" >
+        op_account,
+      </if>
+      <if test="opNick != null" >
+        op_nick,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="word != null" >
+        #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="opAccount != null" >
+        #{opAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="opNick != null" >
+        #{opNick,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        id=values(id),
+      </if>
+      <if test="word != null" >
+        word=values(word),
+      </if>
+      <if test="opAccount != null" >
+        op_account=values(op_account),
+      </if>
+      <if test="opNick != null" >
+        op_nick=values(op_nick),
+      </if>
+      <if test="createTime != null" >
+        create_time=values(create_time),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map" >
+    insert into jinhong_words
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        id,
+      </if>
+      <if test="record.word != null" >
+        word,
+      </if>
+      <if test="record.opAccount != null" >
+        op_account,
+      </if>
+      <if test="record.opNick != null" >
+        op_nick,
+      </if>
+      <if test="record.createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.id != null" >
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.word != null" >
+          #{listItem.word,jdbcType=VARCHAR},
+        </if>
+        <if test="record.opAccount != null" >
+          #{listItem.opAccount,jdbcType=VARCHAR},
+        </if>
+        <if test="record.opNick != null" >
+          #{listItem.opNick,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createTime != null" >
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="record.id != null" >
+        id=values(id),
+      </if>
+      <if test="record.word != null" >
+        word=values(word),
+      </if>
+      <if test="record.opAccount != null" >
+        op_account=values(op_account),
+      </if>
+      <if test="record.opNick != null" >
+        op_nick=values(op_nick),
+      </if>
+      <if test="record.createTime != null" >
+        create_time=values(create_time),
+      </if>
+    </trim>
+  </insert>
+</mapper>

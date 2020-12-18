@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="onLoadJs">
+        <script th:src="@{/dist/js/all.min.js}"></script>
+        <script th:src="@{/lib/plugins/layui/layui.all.js}"></script>
+
+        <script>
+            var url = $.url.param('url');
+            var query = $.url.param("query");
+            if (url !== void 0) {
+                url = url + "?query=" + query;
+                if(url.indexOf("?") >= 0){
+                    url = url + "&v=" + new Date().getTime();
+                }else{
+                    url = url + "?v=" + new Date().getTime();
+                }
+                menuText = $(this).text();
+                $.ajax({
+                    url: url,
+                    cache: false,
+                    dataType: "html",
+                    success: function (html) {
+                        $("#content").html(html);
+                        // 设置标题
+                        if ($("#itemTitle")) {
+                            $("#itemTitle").text(menuText);
+                        }
+                    },
+                    error: function (data) {
+                        $("#content").html("<h3>404&nbsp;&nbsp;The page can not found.</h3>" + data);
+                    }
+                });
+            }
+
+            window.downLoad = function (url){
+                if (url.indexOf("?")==-1) {
+                    url += "?time="+new Date().getTime();
+                }else{
+                    url += "&time="+new Date().getTime();
+                }
+                var ifr;
+                if(document.getElementById('downLoadIframe') == null){
+                    ifr = document.createElement("iframe");
+                    ifr.id = "downLoadIframe";
+                    ifr.onreadystatechange = function(){checkDownLoadState(ifr)};
+                    ifr.style.display ="none";
+                    document.body.appendChild(ifr);
+                }else{
+                    ifr = document.getElementById('downLoadIframe');
+                }
+                ifr.src = url;
+            };
+
+            Date.prototype.format =function(fmt) {
+                var o = {
+                    "M+" : this.getMonth()+1, //月份
+                    "d+" : this.getDate(), //日
+                    "h+" : this.getHours()%12 == 0 ? 12 : this.getHours()%12, //小时
+                    "H+" : this.getHours(), //小时
+                    "m+" : this.getMinutes(), //分
+                    "s+" : this.getSeconds(), //秒
+                    "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                    "S" : this.getMilliseconds() //毫秒
+                };
+                var week = {
+                    "0" : "/u65e5",
+                    "1" : "/u4e00",
+                    "2" : "/u4e8c",
+                    "3" : "/u4e09",
+                    "4" : "/u56db",
+                    "5" : "/u4e94",
+                    "6" : "/u516d"
+                };
+                if(/(y+)/.test(fmt)){
+                    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+                }
+                if(/(E+)/.test(fmt)){
+                    fmt=fmt.replace(RegExp.$1, ((RegExp.$1.length>1) ? (RegExp.$1.length>2 ? "/u661f/u671f" : "/u5468") : "")+week[this.getDay()+""]);
+                }
+                for(var k in o){
+                    if(new RegExp("("+ k +")").test(fmt)){
+                        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                    }
+                }
+                return fmt;
+            }
+            /*有空则返回true（除id参数外）*/
+            window.checkNull = function(serStr) {
+                var split = serStr.split("&");
+                for (var i = 0; i < split.length; i++) {
+                    var idStr = split[i].split("=")[0];
+                    if (idStr != "id" && split[i].endsWith("=")) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            window.urlParam = function(name){
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                if(!results){
+                    return '';
+                }
+                return results[1] || 0;
+            }
+
+            window.initSelect2 = function (selectId) {
+                var domain = document.location.href.indexOf("admanagertest") > 0 ? "yadmintest.yy.com" : "yadmin-new.yy.com";
+                $("#" + selectId).select2({
+                    placeholder: '输入dw账号搜索',
+                    width: "100%",
+                    minimumInputLength: 3,
+                    language: "zh-CN",
+                    allowClear: true,
+                    multiple: true,
+                    ajax: {
+                        url: 'http://' +domain+ '/user/listByPassport',
+                        dataType: 'json',
+                        xhrFields: {withCredentials: true},
+                        data: function (params) {
+                            var query = {
+                                passport: params.term,
+                                pagesize: 10,
+                                page: 1,
+                                _: (new Date()).getTime()
+                            };
+
+                            return query;
+                        },
+                        processResults: function (resp) {
+                            var results = [];
+                            var data = resp.data.rows;
+                            for (var item in data) {
+                                results.push({
+                                    id: data[item].id,
+                                    text: data[item].name
+                                });
+                            }
+                            return {results: results};
+                        }
+                    }
+                });
+            };
+
+            // 记住BootstrapTable需要隐藏的列
+            window.rememberBSTableHiddenFields = function ($bsTable) {
+                $bsTable.on('column-switch.bs.table', function (event, field, checked){
+                    var url = 'ad_HiddenFields_' + $bsTable.bootstrapTable('getOptions').url;
+                    var hiddenFields = [];
+                    if(localStorage.getItem(url)){
+                        hiddenFields = JSON.parse(localStorage.getItem(url));
+                    }
+
+                    var index = hiddenFields.indexOf(field);
+                    if(checked && index !== -1){
+                        hiddenFields.splice(index, 1);
+                    } else {
+                        hiddenFields.push(field);
+                    }
+                    localStorage.setItem(url, JSON.stringify(hiddenFields))
+
+                })
+
+                var url = 'ad_HiddenFields_' + $bsTable.bootstrapTable('getOptions').url;
+                var hiddenFields = [];
+                if(localStorage.getItem(url)){
+                    hiddenFields = JSON.parse(localStorage.getItem(url));
+                }
+
+                hiddenFields.forEach(function (item) {
+                    $bsTable.bootstrapTable('hideColumn', item);
+                });
+            };
+
+
+            toastr.options = {
+                closeButton: true,
+                debug: false,
+                progressBar: false,
+                positionClass: "toast-top-center",
+                onclick: null,
+                showDuration: "300",
+                hideDuration: "1000",
+                timeOut: "3000",
+                extendedTimeOut: "1000",
+                showEasing: "swing",
+                hideEasing: "linear",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut"
+            };
+        </script>
+    </div>
+</body>
+</html>

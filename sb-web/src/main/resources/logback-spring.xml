@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true">
+
+    <property name="LOG_HOME" value="/data/weblog/java/springboot-sb-web" />
+
+    <jmxConfigurator />
+
+    <appender name="error_file"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/web_error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/web_error_%d{yyyy-MM-dd}_%i.log.zip
+            </fileNamePattern>
+            <maxHistory>14</maxHistory>
+            <maxFileSize>100MB</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="warn_file"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/web_warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/web_warn_%d{yyyy-MM-dd}_%i.log.zip
+            </fileNamePattern>
+            <maxHistory>14</maxHistory>
+            <maxFileSize>100MB</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="info_file"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/web_info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/web_info_%d{yyyy-MM-dd}_%i.log.zip
+            </fileNamePattern>
+            <maxHistory>14</maxHistory>
+            <maxFileSize>100MB</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="debug_file"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/web_debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/web_debug_%d{yyyy-MM-dd}_%i.log.zip
+            </fileNamePattern>
+            <maxHistory>14</maxHistory>
+            <maxFileSize>100MB</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%date [%thread] [%level %logger{0}:%line] - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.wuqy.persist.mapper" level="debug" />
+
+    <springProfile name="dev">
+        <root level="debug">
+            <appender-ref ref="console" />
+        </root>
+    </springProfile>
+    <springProfile name="test">
+        <root level="debug">
+            <appender-ref ref="debug_file" />
+            <appender-ref ref="info_file" />
+            <appender-ref ref="warn_file" />
+            <appender-ref ref="error_file" />
+            ${logback-console}
+        </root>
+    </springProfile>
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="debug_file" />
+            <appender-ref ref="info_file" />
+            <appender-ref ref="warn_file" />
+            <appender-ref ref="error_file" />
+            <appender-ref ref="monitor" />
+            ${logback-console}
+        </root>
+    </springProfile>
+    <root level="info">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>

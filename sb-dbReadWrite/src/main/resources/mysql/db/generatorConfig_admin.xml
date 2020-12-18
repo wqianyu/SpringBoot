@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="mysql/db/generator.properties"></properties>
+    <context id="MySQLTables" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <property name="suppressTypeWarnings" value="true"/>
+        <property name="mybatis.generator.overwrite " value="true"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!-- 为sql关键字添加分隔符 -->
+        <property name="autoDelimitKeywords" value="true"/>
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+
+        <!--jdbc的数据库连接 -->
+        <jdbcConnection driverClass="${jdbc.driver}" connectionURL="${jdbc.url}" userId="${jdbc.username}"
+                        password="${jdbc.password}"></jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="${code.javaModelGenerator.targetPackage}"
+                            targetProject="${code.javaModelGenerator.targetProject}">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="${code.sqlMapGenerator.targetPackage}"
+                         targetProject="${code.sqlMapGenerator.targetProject}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="${code.javaClientGenerator.targetPackage}"
+                             targetProject="${code.javaClientGenerator.targetProject}">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table schema="" tableName="t1"
+               enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"
+               enableDeleteByPrimaryKey="true" enableInsert="true"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

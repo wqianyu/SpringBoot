@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="mysql/content/generator.properties"></properties>
+    <context id="MySQLTables" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <property name="suppressTypeWarnings" value="true"/>
+        <property name="mybatis.generator.overwrite " value="true"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!-- 为sql关键字添加分隔符 -->
+        <property name="autoDelimitKeywords" value="true"/>
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+
+        <plugin type="com.yy.mybatis_generator.plugins.DeleteExistedXmlPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <plugin type="com.yy.mybatis_generator.plugins.BuilderPlugin"/>
+        <plugin type="com.yy.mybatis_generator.plugins.JsonIgnoreGenerator"/>
+        <plugin type="com.yy.mybatis_generator.plugins.AddExtraFieldAliasPlugin"/>
+        <plugin type="com.yy.mybatis_generator.plugins.OverWriteMapperPlugin"/>
+        <plugin type="com.yy.mybatis_generator.efficient.plugins.FlatCauseSupportPlugin"/>
+        <!--        <plugin type="com.yy.mybatis_generator.efficient.plugins.TranslateSupportPlugin2"/>-->
+        <plugin type="com.yy.mybatis_generator.plugins.BatchOperSupportPlugin"/>
+        <plugin type="com.yy.mybatis_generator.efficient.plugins.MySQLPaginationPluginWithCustomPage"/>
+
+        <commentGenerator type="com.yy.mybatis_generator.plugins.DefaultCommentGenerator">
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+
+        <!--jdbc的数据库连接 -->
+        <jdbcConnection driverClass="${jdbc.driver}" connectionURL="${jdbc.url}" userId="${jdbc.username}"
+                        password="${jdbc.password}"></jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="${code.javaModelGenerator.targetPackage}"
+                            targetProject="${code.javaModelGenerator.targetProject}">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="${code.sqlMapGenerator.targetPackage}"
+                         targetProject="${code.sqlMapGenerator.targetProject}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="${code.javaClientGenerator.targetPackage}"
+                             targetProject="${code.javaClientGenerator.targetProject}">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--<table schema="" tableName="ad_tag_mid"
+               enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"
+               enableDeleteByPrimaryKey="true" enableInsert="true"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+        <!--<table schema="" tableName="jinhong_account"
+               enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"
+               enableDeleteByPrimaryKey="true" enableInsert="true"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="" tableName="jinhong_words"
+               enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"
+               enableDeleteByPrimaryKey="true" enableInsert="true"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="" tableName="jinhong_user_visit"
+               enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"
+               enableDeleteByPrimaryKey="true" enableInsert="true"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+        <table schema="" tableName="jinhong_history"
+               enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"
+               enableDeleteByPrimaryKey="true" enableInsert="true"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

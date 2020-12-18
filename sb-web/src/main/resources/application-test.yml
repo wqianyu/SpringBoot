@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active: test
+    include: common
+  task:
+    scheduling:
+      pool:
+        size: 16
+  main:
+    allow-bean-definition-overriding: true
+  http-client:
+    pool:
+      maxTotalConnect: 1000
+      maxConnectPerRoute: 200
+      connectTimeout: 5000
+      readTimeout: 10000
+      connectionRequestTimout: 200
+      retryTimes: 0
+      charset: UTF-8
+      keepAliveTime: 10
+  servlet:
+    multipart:
+      max-file-size: 1100MB
+      max-request-size: 1100MB
+  thymeleaf:
+    cache: false
+
+server:
+  port: 8010
+  compression:
+    enabled: true
+  tomcat:
+    uri-encoding: UTF-8
+
+logging:
+  config: classpath:logback-spring.xml

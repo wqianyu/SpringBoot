@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuqy.persist.mapper.content.JinhongManageLogMapper" >
+  <resultMap id="BaseResultMap" type="com.wuqy.common.entity.content.JinhongManageLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="module" property="module" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="operate" property="operate" jdbcType="VARCHAR" />
+    <result column="msg" property="msg" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="nick" property="nick" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <if test="oredCriteria != null" >
+        <foreach collection="oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="id != null" >
+         and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="module != null and module != ''" >
+         and `module` = #{module,jdbcType=VARCHAR}
+      </if>
+      <if test="moduleRange != null and moduleRange != ''" >
+         and `module` like #{moduleRange,jdbcType=VARCHAR}
+      </if>
+      <if test="ip != null and ip != ''" >
+         and ip = #{ip,jdbcType=VARCHAR}
+      </if>
+      <if test="ipRange != null and ipRange != ''" >
+         and ip like #{ipRange,jdbcType=VARCHAR}
+      </if>
+      <if test="operate != null and operate != ''" >
+         and operate = #{operate,jdbcType=VARCHAR}
+      </if>
+      <if test="operateRange != null and operateRange != ''" >
+         and operate like #{operateRange,jdbcType=VARCHAR}
+      </if>
+      <if test="msg != null and msg != ''" >
+         and msg = #{msg,jdbcType=VARCHAR}
+      </if>
+      <if test="msgRange != null and msgRange != ''" >
+         and msg like #{msgRange,jdbcType=VARCHAR}
+      </if>
+      <if test="result != null" >
+         and `result` = #{result,jdbcType=INTEGER}
+      </if>
+      <if test="account != null and account != ''" >
+         and account = #{account,jdbcType=VARCHAR}
+      </if>
+      <if test="accountRange != null and accountRange != ''" >
+         and account like #{accountRange,jdbcType=VARCHAR}
+      </if>
+      <if test="nick != null and nick != ''" >
+         and nick = #{nick,jdbcType=VARCHAR}
+      </if>
+      <if test="nickRange != null and nickRange != ''" >
+         and nick like #{nickRange,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+         and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange1 != null" >
+         and create_time &gt;= #{createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange2 != null" >
+         and create_time &lt;= #{createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="extracClause != null and extracClause != ''" >
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <if test="example.oredCriteria != null" >
+        <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.id != null" >
+         and id = #{example.id,jdbcType=INTEGER}
+      </if>
+      <if test="example.module != null and example.module != ''" >
+         and `module` = #{example.module,jdbcType=VARCHAR}
+      </if>
+      <if test="example.moduleRange != null and example.moduleRange != ''" >
+         and `module` like #{example.moduleRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.ip != null and example.ip != ''" >
+         and ip = #{example.ip,jdbcType=VARCHAR}
+      </if>
+      <if test="example.ipRange != null and example.ipRange != ''" >
+         and ip like #{example.ipRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.operate != null and example.operate != ''" >
+         and operate = #{example.operate,jdbcType=VARCHAR}
+      </if>
+      <if test="example.operateRange != null and example.operateRange != ''" >
+         and operate like #{example.operateRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.msg != null and example.msg != ''" >
+         and msg = #{example.msg,jdbcType=VARCHAR}
+      </if>
+      <if test="example.msgRange != null and example.msgRange != ''" >
+         and msg like #{example.msgRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.result != null" >
+         and `result` = #{example.result,jdbcType=INTEGER}
+      </if>
+      <if test="example.account != null and example.account != ''" >
+         and account = #{example.account,jdbcType=VARCHAR}
+      </if>
+      <if test="example.accountRange != null and example.accountRange != ''" >
+         and account like #{example.accountRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.nick != null and example.nick != ''" >
+         and nick = #{example.nick,jdbcType=VARCHAR}
+      </if>
+      <if test="example.nickRange != null and example.nickRange != ''" >
+         and nick like #{example.nickRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.createTime != null" >
+         and create_time = #{example.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange1 != null" >
+         and create_time &gt;= #{example.createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange2 != null" >
+         and create_time &lt;= #{example.createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''" >
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, `module`, ip, operate, msg, `result`, account, nick, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wuqy.common.entity.content.JinhongManageLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from jinhong_manage_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitEnd != null" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from jinhong_manage_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jinhong_manage_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wuqy.common.entity.content.JinhongManageLogExample" >
+    delete from jinhong_manage_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wuqy.common.entity.content.JinhongManageLog" useGeneratedKeys="true" keyProperty="id" >
+    insert into jinhong_manage_log (`module`, ip, operate, 
+      msg, `result`, account, 
+      nick, create_time)
+    values (#{module,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{operate,jdbcType=VARCHAR}, 
+      #{msg,jdbcType=VARCHAR}, #{result,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, 
+      #{nick,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wuqy.common.entity.content.JinhongManageLog" useGeneratedKeys="true" keyProperty="id" >
+    insert into jinhong_manage_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="module != null" >
+        `module`,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="operate != null" >
+        operate,
+      </if>
+      <if test="msg != null" >
+        msg,
+      </if>
+      <if test="result != null" >
+        `result`,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="nick != null" >
+        nick,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="module != null" >
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="operate != null" >
+        #{operate,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="nick != null" >
+        #{nick,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wuqy.common.entity.content.JinhongManageLogExample" resultType="java.lang.Integer" >
+    select count(*) from jinhong_manage_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update jinhong_manage_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.module != null" >
+        `module` = #{record.module,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operate != null" >
+        operate = #{record.operate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msg != null" >
+        msg = #{record.msg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null" >
+        `result` = #{record.result,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nick != null" >
+        nick = #{record.nick,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update jinhong_manage_log
+    set id = #{record.id,jdbcType=INTEGER},
+      `module` = #{record.module,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      operate = #{record.operate,jdbcType=VARCHAR},
+      msg = #{record.msg,jdbcType=VARCHAR},
+      `result` = #{record.result,jdbcType=INTEGER},
+      account = #{record.account,jdbcType=VARCHAR},
+      nick = #{record.nick,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wuqy.common.entity.content.JinhongManageLog" >
+    update jinhong_manage_log
+    <set >
+      <if test="module != null" >
+        `module` = #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="operate != null" >
+        operate = #{operate,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        `result` = #{result,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="nick != null" >
+        nick = #{nick,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wuqy.common.entity.content.JinhongManageLog" >
+    update jinhong_manage_log
+    set `module` = #{module,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      operate = #{operate,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      `result` = #{result,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
+      nick = #{nick,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertListSelective" parameterType="map" >
+    insert into jinhong_manage_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        id,
+      </if>
+      <if test="record.module != null" >
+        `module`,
+      </if>
+      <if test="record.ip != null" >
+        ip,
+      </if>
+      <if test="record.operate != null" >
+        operate,
+      </if>
+      <if test="record.msg != null" >
+        msg,
+      </if>
+      <if test="record.result != null" >
+        `result`,
+      </if>
+      <if test="record.account != null" >
+        account,
+      </if>
+      <if test="record.nick != null" >
+        nick,
+      </if>
+      <if test="record.createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.id != null" >
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.module != null" >
+          #{listItem.module,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ip != null" >
+          #{listItem.ip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operate != null" >
+          #{listItem.operate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.msg != null" >
+          #{listItem.msg,jdbcType=VARCHAR},
+        </if>
+        <if test="record.result != null" >
+          #{listItem.result,jdbcType=INTEGER},
+        </if>
+        <if test="record.account != null" >
+          #{listItem.account,jdbcType=VARCHAR},
+        </if>
+        <if test="record.nick != null" >
+          #{listItem.nick,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createTime != null" >
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map" >
+    replace into jinhong_manage_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        id,
+      </if>
+      <if test="record.module != null" >
+        `module`,
+      </if>
+      <if test="record.ip != null" >
+        ip,
+      </if>
+      <if test="record.operate != null" >
+        operate,
+      </if>
+      <if test="record.msg != null" >
+        msg,
+      </if>
+      <if test="record.result != null" >
+        `result`,
+      </if>
+      <if test="record.account != null" >
+        account,
+      </if>
+      <if test="record.nick != null" >
+        nick,
+      </if>
+      <if test="record.createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.id != null" >
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.module != null" >
+          #{listItem.module,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ip != null" >
+          #{listItem.ip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operate != null" >
+          #{listItem.operate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.msg != null" >
+          #{listItem.msg,jdbcType=VARCHAR},
+        </if>
+        <if test="record.result != null" >
+          #{listItem.result,jdbcType=INTEGER},
+        </if>
+        <if test="record.account != null" >
+          #{listItem.account,jdbcType=VARCHAR},
+        </if>
+        <if test="record.nick != null" >
+          #{listItem.nick,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createTime != null" >
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.wuqy.common.entity.content.JinhongManageLog" >
+    replace into jinhong_manage_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="module != null" >
+        `module`,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="operate != null" >
+        operate,
+      </if>
+      <if test="msg != null" >
+        msg,
+      </if>
+      <if test="result != null" >
+        `result`,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="nick != null" >
+        nick,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="module != null" >
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="operate != null" >
+        #{operate,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="nick != null" >
+        #{nick,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.wuqy.common.entity.content.JinhongManageLog" >
+    insert into jinhong_manage_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="module != null" >
+        `module`,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="operate != null" >
+        operate,
+      </if>
+      <if test="msg != null" >
+        msg,
+      </if>
+      <if test="result != null" >
+        `result`,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="nick != null" >
+        nick,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="module != null" >
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="operate != null" >
+        #{operate,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="nick != null" >
+        #{nick,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        id=values(id),
+      </if>
+      <if test="module != null" >
+        `module`=values(`module`),
+      </if>
+      <if test="ip != null" >
+        ip=values(ip),
+      </if>
+      <if test="operate != null" >
+        operate=values(operate),
+      </if>
+      <if test="msg != null" >
+        msg=values(msg),
+      </if>
+      <if test="result != null" >
+        `result`=values(`result`),
+      </if>
+      <if test="account != null" >
+        account=values(account),
+      </if>
+      <if test="nick != null" >
+        nick=values(nick),
+      </if>
+      <if test="createTime != null" >
+        create_time=values(create_time),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map" >
+    insert into jinhong_manage_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        id,
+      </if>
+      <if test="record.module != null" >
+        `module`,
+      </if>
+      <if test="record.ip != null" >
+        ip,
+      </if>
+      <if test="record.operate != null" >
+        operate,
+      </if>
+      <if test="record.msg != null" >
+        msg,
+      </if>
+      <if test="record.result != null" >
+        `result`,
+      </if>
+      <if test="record.account != null" >
+        account,
+      </if>
+      <if test="record.nick != null" >
+        nick,
+      </if>
+      <if test="record.createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.id != null" >
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.module != null" >
+          #{listItem.module,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ip != null" >
+          #{listItem.ip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operate != null" >
+          #{listItem.operate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.msg != null" >
+          #{listItem.msg,jdbcType=VARCHAR},
+        </if>
+        <if test="record.result != null" >
+          #{listItem.result,jdbcType=INTEGER},
+        </if>
+        <if test="record.account != null" >
+          #{listItem.account,jdbcType=VARCHAR},
+        </if>
+        <if test="record.nick != null" >
+          #{listItem.nick,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createTime != null" >
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="record.id != null" >
+        id=values(id),
+      </if>
+      <if test="record.module != null" >
+        `module`=values(`module`),
+      </if>
+      <if test="record.ip != null" >
+        ip=values(ip),
+      </if>
+      <if test="record.operate != null" >
+        operate=values(operate),
+      </if>
+      <if test="record.msg != null" >
+        msg=values(msg),
+      </if>
+      <if test="record.result != null" >
+        `result`=values(`result`),
+      </if>
+      <if test="record.account != null" >
+        account=values(account),
+      </if>
+      <if test="record.nick != null" >
+        nick=values(nick),
+      </if>
+      <if test="record.createTime != null" >
+        create_time=values(create_time),
+      </if>
+    </trim>
+  </insert>
+</mapper>
