@@ -16,7 +16,10 @@
     <module>sb-common</module>
     <module>sb-spider</module>
     <module>sb-web</module>
-      <module>sb-dbReadWrite</module>
+    <module>sb-dbReadWrite</module>
+    <module>sb-sharding</module>
+    <module>sb-webflux</module>
+    <module>sb-sentinel</module>
   </modules>
   <dependencies>
     <dependency>
