@@ -20,6 +20,9 @@
     <module>sb-sharding</module>
     <module>sb-webflux</module>
     <module>sb-sentinel</module>
+    <module>sb-ratelimiter</module>
+    <module>sb-vertx</module>
+    <module>sb-vertx2</module>
   </modules>
   <dependencies>
     <dependency>
